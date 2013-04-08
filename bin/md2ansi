@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+$:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
+
+require 'md2ansi'
+require 'optparse'
+
+begin
+  options = {}
+
+  opts = OptionParser.new do |opts|
+    opts.banner = "Usage md2ansi [FILE.md]"
+    opts.separator ""
+    opts.separator "Specific options."
+
+    opts.on('-h', '--help', 'Display help message') do
+      puts opts
+      exit
+    end
+  end
+
+  puts Md2Ansi::CLI.new.render(ARGF.read)
+
+end
